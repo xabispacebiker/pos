@@ -13,9 +13,9 @@
         </xpath>
         <xpath expr="//div[hasclass('product-img')]/span[@class='price-tag']" position="after">
             <t t-if="!hasImage">
-                <t t-set="name_length" t-value="props.product.display_name.length"/>
+                <t t-set="name_length" t-value="props.product.display_name.length" />
                 <t t-if='env.pos.config.iface_fixed_font_size'>
-                    <t t-set="font_size" t-value="env.pos.config.iface_fixed_font_size"/>
+                    <t t-set="font_size" t-value="env.pos.config.iface_fixed_font_size" />
                 </t>
                 <t t-else="">
                     <t t-set="font_size" t-value="
@@ -26,8 +26,8 @@
                         or name_length>=40 and 16
                         or 20"/>
                 </t>
-                <div class="product-name" t-attf-id="article_product_{{props.product.id}}">
-                    <span t-attf-style="font-size: {{font_size}}px !important; line-height: {{font_size}}px !important;"><t t-esc="props.product.display_name" /></span>
+                <div class="product-name" t-attf-id="article_product_{{props.product.id}}" t-attf-style="font-size: {{font_size}}px !important; line-height: {{font_size}}px !important;">
+                    <span><t t-esc="props.product.display_name" /></span>
                 </div>
             </t>
         </xpath>
