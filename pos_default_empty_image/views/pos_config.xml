@@ -14,7 +14,8 @@
                     <div class="o_setting_right_pane">
                         <label for="iface_fixed_font_size" string="Fixed Font Size"/>
                         <div class="text-muted">
-                            Font size of the product name, when it has no image. Set '0' will set adaptative font-size, depending on the length of the name.
+                            Font size of the product name, when it has no image. Set '0' will set adaptative font-size,
+                            depending on the length of the name.
                         </div>
                         <div class="content-group mt16">
                             <field name="iface_fixed_font_size"/>
@@ -25,9 +26,6 @@
             </xpath>
         </field>
     </record>
-
-
-
 
 
 </odoo>

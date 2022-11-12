@@ -12,7 +12,7 @@ class PosConfig(models.Model):
     iface_fixed_font_size = fields.Integer(
         string="Fixed Font Size",
         help="Font size of the product name, when it has no image."
-        " Set '0' will set adaptative font-size, depending on the"
-        " length of the name.",
+             " Set '0' will set adaptative font-size, depending on the"
+             " length of the name.",
         default="0"
     )

@@ -5,18 +5,18 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 */
 
-.pos .product .product-img.no-image .product-name
-{
-    position:relative;
+.pos .product .product-img.no-image .product-name {
+    position: relative;
     display: table;
     height: 120px;
-    max-height: 115px!important;
+    max-height: 115px !important;
 }
+
 .pos .product .product-img.no-image .product-name span {
     display: table-cell;
     vertical-align: middle;
 }
-.pos .product .product-img.no-image .price-tag
-{
+
+.pos .product .product-img.no-image .price-tag {
     z-index: 1;
 }
