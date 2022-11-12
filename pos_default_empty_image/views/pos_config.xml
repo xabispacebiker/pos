@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2020 Creu Blanca
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
 
     <record model="ir.ui.view" id="pos_config_view_form">
@@ -14,12 +11,8 @@
                     <div class="o_setting_right_pane">
                         <label for="iface_fixed_font_size" string="Fixed Font Size"/>
                         <div class="text-muted">
-<<<<<<< HEAD
                             Font size of the product name, when it has no image. Set '0' will set adaptative font-size,
                             depending on the length of the name.
-=======
-                            Font size of the product name, when it has no image. Set '0' will set adaptative font-size, depending on the length of the name.
->>>>>>> 034380f054e0d12b5a4e75e8eb20cbc7914be037
                         </div>
                         <div class="content-group mt16">
                             <field name="iface_fixed_font_size"/>
@@ -32,10 +25,4 @@
     </record>
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 034380f054e0d12b5a4e75e8eb20cbc7914be037
 </odoo>

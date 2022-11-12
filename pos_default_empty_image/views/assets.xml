@@ -2,14 +2,9 @@
 <odoo>
     <template id="assets" inherit_id="point_of_sale.assets">
         <xpath expr="." position="inside">
-<<<<<<< HEAD
             <script type="text/javascript" src="/pos_default_empty_image/static/src/js/models.js"/>
             <script type="text/javascript"
                     src="/pos_default_empty_image/static/src/js/Screens/ProductScreen/ProductItem.js"/>
-=======
-            <script  type="text/javascript"  src="/pos_default_empty_image/static/src/js/models.js"/>
-            <script  type="text/javascript"  src="/pos_default_empty_image/static/src/js/Screens/ProductScreen/ProductItem.js"/>
->>>>>>> 034380f054e0d12b5a4e75e8eb20cbc7914be037
         </xpath>
     </template>
     <template id="assets_backend" name="pos_default_empty_image assets" inherit_id="point_of_sale.assets">

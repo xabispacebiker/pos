@@ -5,7 +5,6 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 */
 
-<<<<<<< HEAD
 .pos .product .product-img.no-image .product-name {
     position: relative;
     display: table;
@@ -13,25 +12,11 @@
     max-height: 115px !important;
 }
 
-=======
-.pos .product .product-img.no-image .product-name
-{
-    position:relative;
-    display: table;
-    height: 120px;
-    max-height: 115px!important;
-}
->>>>>>> 034380f054e0d12b5a4e75e8eb20cbc7914be037
 .pos .product .product-img.no-image .product-name span {
     display: table-cell;
     vertical-align: middle;
 }
-<<<<<<< HEAD
 
 .pos .product .product-img.no-image .price-tag {
-=======
-.pos .product .product-img.no-image .price-tag
-{
->>>>>>> 034380f054e0d12b5a4e75e8eb20cbc7914be037
     z-index: 1;
 }
