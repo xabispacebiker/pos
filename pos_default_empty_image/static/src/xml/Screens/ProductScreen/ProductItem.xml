@@ -26,8 +26,8 @@
                         or name_length>=40 and 16
                         or 20"/>
                 </t>
-                <div class="product-name" t-attf-id="article_product_{{props.product.id}}" t-attf-style="font-size: {{font_size}}px !important; line-height: {{font_size}}px !important;">
-                    <span><t t-esc="props.product.display_name" /></span>
+                <div class="product-name" t-attf-id="article_product_{{props.product.id}}">
+                    <span t-attf-style="font-size: {{font_size}}px !important; line-height: {{font_size}}px !important;"><t t-esc="props.product.display_name" /></span>
                 </div>
             </t>
         </xpath>
