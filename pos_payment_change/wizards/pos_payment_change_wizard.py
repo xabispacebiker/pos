@@ -4,6 +4,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class PosPaymentChangeWizard(models.TransientModel):
@@ -62,7 +63,14 @@ class PosPaymentChangeWizard(models.TransientModel):
 
         # Check if the total is correct
         total = sum(self.mapped("new_line_ids.amount"))
-        if total != self.amount_total:
+        if (
+            float_compare(
+                total,
+                self.amount_total,
+                precision_rounding=self.order_id.currency_id.rounding,
+            )
+            != 0
+        ):
             raise UserError(
                 _(
                     "Differences between the two values for the POS"
@@ -98,7 +106,9 @@ class PosPaymentChangeWizard(models.TransientModel):
             action = {"type": "ir.actions.act_window_close"}
         else:
             # otherwise (refund policy), displays the 3 orders
-            action = self.env.ref("point_of_sale.action_pos_pos_form").read()[0]
+            action = self.env["ir.actions.act_window"]._for_xml_id(
+                "point_of_sale.action_pos_pos_form"
+            )
             action["domain"] = [("id", "in", orders.ids)]
 
         return action

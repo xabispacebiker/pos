@@ -2,10 +2,9 @@
 # Copyright 2018 David Vidal <david.vidal@tecnativa.com>
 # Copyright 2018 Lambda IS DOOEL <https://www.lambda-is.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tests import Form
 
 
 class PosOrder(models.Model):
@@ -109,38 +108,69 @@ class PosOrder(models.Model):
             self._action_pos_order_invoice()
         return res
 
+    def _get_picking_destination(self):
+        picking_type = self.config_id.picking_type_id
+        if self.partner_id.property_stock_customer:
+            destination = self.partner_id.property_stock_customer
+        elif not picking_type or not picking_type.default_location_dest_id:
+            destination = self.env["stock.warehouse"]._get_partner_locations()[0]
+        else:
+            destination = picking_type.default_location_dest_id
+        return destination
+
     def _create_picking_return(self):
         self.ensure_one()
-        picking = self.returned_order_id.picking_ids
-        ctx = dict(self.env.context, active_ids=picking.ids, active_id=picking.id)
-        wizard = self.env["stock.return.picking"].with_context(ctx).create({})
+        return_form = Form(
+            self.env["stock.return.picking"].with_context(
+                active_id=self.returned_order_id.picking_ids.filtered(
+                    lambda picking: picking.location_dest_id.usage == "customer"
+                ).id,
+                active_model="stock.picking",
+            )
+        )
+        wizard = return_form.save()
         # Discard not returned lines
         wizard.product_return_moves.filtered(
             lambda x: x.product_id not in self.mapped("lines.product_id")
         ).unlink()
         to_return = {}
-        for product in self.lines.mapped("product_id"):
-            to_return[product] = -sum(
-                self.lines.filtered(lambda x: x.product_id == product).mapped("qty")
-            )
+        order_lines = self.lines
+        for order_line in order_lines:
+            to_return.setdefault(order_line.product_id, 0)
+            if order_line.qty > 0:
+                continue
+            order_lines -= order_line
+            to_return[order_line.product_id] += order_line.qty
         for move in wizard.product_return_moves:
-            if to_return[move.product_id] < move.quantity:
-                move.quantity = to_return[move.product_id]
+            if abs(to_return[move.product_id]) < move.quantity:
+                move.quantity = abs(to_return[move.product_id])
             to_return[move.product_id] -= move.quantity
-        return wizard
+        picking = self.env["stock.picking"].browse(wizard.create_returns()["res_id"])
+        normal_picking = self.env["stock.picking"]._create_picking_from_pos_order_lines(
+            self._get_picking_destination().id,
+            order_lines,
+            self.config_id.picking_type_id,
+            self.partner_id,
+        )
+        for move in picking.move_lines:
+            move.quantity_done = move.product_uom_qty
+        picking._action_done()
+        (picking | normal_picking).write(
+            {
+                "pos_session_id": self.session_id.id,
+                "pos_order_id": self.id,
+                "origin": self.name,
+            }
+        )
+        return picking | normal_picking
 
     def _create_order_picking(self):
         """Odoo bases return picking if the quantities are negative, but it's
         not linked to the original one"""
-        orders = self.filtered(
-            lambda x: not x.returned_order_id or not x.returned_order_id.picking_ids
-        )
-        res = super()._create_order_picking()
-        for order in self - orders:
-            wizard = order._create_picking_return()
-            res = wizard.create_returns()
-            order.write({"picking_ids": (6, 0, [res["res_id"]])})
-        return res
+        self.ensure_one()
+        if not self.returned_order_id.picking_ids:
+            return super()._create_order_picking()
+        self.picking_ids = self._create_picking_return()
 
 
 class PosOrderLine(models.Model):
