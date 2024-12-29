@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-18 11:15+0000\n"
-"PO-Revision-Date: 2023-06-15 11:15+0000\n"
+"PO-Revision-Date: 2023-10-11 15:38+0000\n"
 "Last-Translator: Anna Martínez <anna080678@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -38,7 +38,7 @@ msgstr "Duplicar Orden"
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_config__display_name
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_order__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #. module: pos_order_mgmt
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_config__iface_copy_done_order
@@ -49,12 +49,35 @@ msgstr "Órdenes duplicadas"
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_config__id
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_order__id
 msgid "ID"
+msgstr "ID"
+
+#. module: pos_order_mgmt
+#. openerp-web
+#: code:addons/pos_order_mgmt/static/src/js/ProductScreen.js:0
+#, python-format
+msgid "Incorrect quantities"
+msgstr ""
+
+#. module: pos_order_mgmt
+#. openerp-web
+#: code:addons/pos_order_mgmt/static/src/js/ProductScreen.js:0
+#, python-format
+msgid ""
+"It is returning more than the quantity delivered.\n"
+"                            Would you like to proceed anyway?"
 msgstr ""
 
 #. module: pos_order_mgmt
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_config____last_update
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_order____last_update
 msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: pos_order_mgmt
+#. openerp-web
+#: code:addons/pos_order_mgmt/static/src/js/ProductScreen.js:0
+#, python-format
+msgid "No"
 msgstr ""
 
 #. module: pos_order_mgmt
@@ -85,6 +108,13 @@ msgstr "Devolución"
 #: model:ir.model.fields,field_description:pos_order_mgmt.field_pos_config__iface_return_done_order
 msgid "Return Orders"
 msgstr "Pedidos de Devolución"
+
+#. module: pos_order_mgmt
+#. openerp-web
+#: code:addons/pos_order_mgmt/static/src/js/ProductScreen.js:0
+#, python-format
+msgid "Yes"
+msgstr ""
 
 #~ msgid "Allows to manage already done orders in the frontend."
 #~ msgstr "Permite gestionar pedidos ya realizados en la interfaz."
